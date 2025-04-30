@@ -92,16 +92,21 @@ const App = () => {
     return (
       <div className="join-container">
         <div className="join-form">
-          <h1>Join Code Room</h1>
+          <div className="app-logo">
+            <h1>
+              Code<span>Together</span>
+            </h1>
+            <p>Real-time collaborative code editor</p>
+          </div>
           <input
             type="text"
-            placeholder="Room Id"
+            placeholder="Enter Room ID"
             value={roomId}
             onChange={(e) => setRoomId(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Your Name"
+            placeholder="Your Username"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
@@ -114,14 +119,19 @@ const App = () => {
   return (
     <div className="editor-container">
       <div className="sidebar">
+        <div className="app-logo">
+          <h1>
+            Code<span>Together</span>
+          </h1>
+        </div>
         <div className="room-info">
-          <h2>Code Room: {roomId}</h2>
+          <h2>Room: {roomId}</h2>
           <button onClick={copyRoomId} className="copy-button">
-            Copy Id
+            Copy Room ID
           </button>
           {copySuccess && <span className="copy-success">{copySuccess}</span>}
         </div>
-        <h3>Users in Room:</h3>
+        <h3>Collaborators</h3>
         <ul>
           {users.map((user, index) => (
             <li key={index}>{user.slice(0, 8)}...</li>
@@ -137,6 +147,9 @@ const App = () => {
           <option value="python">Python</option>
           <option value="java">Java</option>
           <option value="cpp">C++</option>
+          <option value="typescript">TypeScript</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
         </select>
         <button className="leave-button" onClick={leaveRoom}>
           Leave Room
@@ -145,7 +158,7 @@ const App = () => {
 
       <div className="editor-wrapper">
         <Editor
-          height={"100%"}
+          height="100%"
           defaultLanguage={language}
           language={language}
           value={code}
@@ -153,12 +166,17 @@ const App = () => {
           theme="vs-dark"
           options={{
             minimap: { enabled: false },
-            fontSize: 14,
+            fontSize: 16,
+            fontFamily: "'Roboto Mono', monospace",
+            scrollBeyondLastLine: false,
+            automaticLayout: true,
+            lineHeight: 1.6,
           }}
         />
       </div>
     </div>
   );
 };
+
 
 export default App;
